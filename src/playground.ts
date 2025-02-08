@@ -301,10 +301,10 @@ function makeGUI() {
   });
   let currentMax = parseInt(noise.property("max"));
   if (state.noise > currentMax) {
-    if (state.noise <= 80) {
+    if (state.noise <= 100) {
       noise.property("max", state.noise);
     } else {
-      state.noise = 50;
+      state.noise = 70;
     }
   } else if (state.noise < 0) {
     state.noise = 0;

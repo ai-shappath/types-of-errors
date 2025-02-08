@@ -206,6 +206,8 @@ export function classifyXORData(numSamples: number, noise: number):
   return points;
 }
 
+
+
 /**
  * Returns a sample from a uniform [a, b] distribution.
  * Uses the seedrandom library as the random generator.
