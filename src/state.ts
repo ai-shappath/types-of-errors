@@ -141,7 +141,7 @@ export class State {
   batchSize = 5;
   discretize = true;
   tutorial: string = null;
-  percTrainData = 50;
+  percTrainData = 2;
   activation = nn.Activations.RELU;
   regularization: nn.RegularizationFunction = null;
   problem = Problem.CLASSIFICATION;
