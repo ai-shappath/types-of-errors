@@ -137,11 +137,11 @@ export class State {
   learningRate = 0.01;
   regularizationRate = 0;
   showTestData = false;
-  noise = 0;
+  noise = 8;
   batchSize = 5;
   discretize = true;
   tutorial: string = null;
-  percTrainData = 2;
+  percTrainData = 4;
   activation = nn.Activations.RELU;
   regularization: nn.RegularizationFunction = null;
   problem = Problem.CLASSIFICATION;
