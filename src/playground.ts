@@ -216,14 +216,35 @@ function makeGUI() {
     dataThumbnails.classed("selected", false);
     d3.select(this).classed("selected", true);
 
-    // Set noise to 140 if XOR dataset is selected
-    if (this.dataset.dataset === "xor") {
-      let noise = d3.select("#noise");
-      state.noise = 140;
-      noise.property("max", 200);  // Ensure max is high enough
-      noise.property("value", state.noise);
-      d3.select("label[for='noise'] .value").text(state.noise);
-    }
+    // // Set noise to 140 if XOR dataset is selected
+    // if (this.dataset.dataset === "xor") {
+    //   let noise = d3.select("#noise");
+    //   state.noise = 140;
+    //   noise.property("max", 200);  // Ensure max is high enough
+    //   noise.property("value", state.noise);
+    //   d3.select("label[for='noise'] .value").text(state.noise);
+    // }
+    // if (this.dataset.dataset === "circle") {
+    //   let noise = d3.select("#noise");
+    //   state.noise = 0;
+    //   noise.property("max", 200);  // Ensure max is high enough
+    //   noise.property("value", state.noise);
+    //   d3.select("label[for='noise'] .value").text(state.noise);
+    // }
+    // if (this.dataset.dataset === "gauss") {
+    //   let noise = d3.select("#noise");
+    //   state.noise = 0;
+    //   noise.property("max", 200);  // Ensure max is high enough
+    //   noise.property("value", state.noise);
+    //   d3.select("label[for='noise'] .value").text(state.noise);
+    // }
+    // if (this.dataset.dataset === "spiral") {
+    //   let noise = d3.select("#noise");
+    //   state.noise = 0;
+    //   noise.property("max", 200);  // Ensure max is high enough
+    //   noise.property("value", state.noise);
+    //   d3.select("label[for='noise'] .value").text(state.noise);
+    // }
 
     generateData();
     parametersChanged = true;

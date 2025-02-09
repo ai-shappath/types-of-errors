@@ -203,8 +203,8 @@ export function classifyXORData(numSamples: number, noise: number):
     }
   }
 
-  genGauss(2, 2, 1); // Gaussian with positive examples.
-  genGauss(-2, -2, -1); // Gaussian with negative examples.
+  genGauss(0, 0, 1); // Gaussian with positive examples.
+  genGauss(0, 0, -1); // Gaussian with negative examples.
   return points;
 }
 
