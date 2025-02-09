@@ -215,6 +215,16 @@ function makeGUI() {
     state.dataset =  newDataset;
     dataThumbnails.classed("selected", false);
     d3.select(this).classed("selected", true);
+
+    // Set noise to 140 if XOR dataset is selected
+    if (this.dataset.dataset === "xor") {
+      let noise = d3.select("#noise");
+      state.noise = 140;
+      noise.property("max", 200);  // Ensure max is high enough
+      noise.property("value", state.noise);
+      d3.select("label[for='noise'] .value").text(state.noise);
+    }
+
     generateData();
     parametersChanged = true;
     reset();
@@ -1077,17 +1087,7 @@ function generateData(firstTime = false) {
   let generator = state.problem === Problem.CLASSIFICATION ?
       state.dataset : state.regDataset;
 
-  let datasetKey = getKeyFromValue(datasets, state.dataset);
-
-  // Check if current dataset is XOR using the key
-  let noiseValue;
-  if (datasetKey === "xor") {
-    noiseValue = 140 / 100;
-  } else {
-    noiseValue = state.noise / 100;
-  }
-
-  let data = generator(numSamples, noiseValue);
+  let data = generator(numSamples, state.noise / 100);
 
   // Shuffle the data in-place.
   shuffle(data);

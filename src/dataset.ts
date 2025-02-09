@@ -193,7 +193,7 @@ export function classifyXORData(numSamples: number, noise: number):
   let points: Example2D[] = [];
 
   let varianceScale = d3.scale.linear().domain([0, .5]).range([0.5, 4]);
-  let variance = varianceScale(140);
+  let variance = varianceScale(noise);
 
   function genGauss(cx: number, cy: number, label: number) {
     for (let i = 0; i < numSamples / 2; i++) {
