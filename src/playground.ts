@@ -1076,7 +1076,19 @@ function generateData(firstTime = false) {
       NUM_SAMPLES_REGRESS : NUM_SAMPLES_CLASSIFY;
   let generator = state.problem === Problem.CLASSIFICATION ?
       state.dataset : state.regDataset;
-  let data = generator(numSamples, state.noise / 100);
+
+  let datasetKey = getKeyFromValue(datasets, state.dataset);
+
+  // Check if current dataset is XOR using the key
+  let noiseValue;
+  if (datasetKey === "xor") {
+    noiseValue = 140 / 100;
+  } else {
+    noiseValue = state.noise / 100;
+  }
+
+  let data = generator(numSamples, noiseValue);
+
   // Shuffle the data in-place.
   shuffle(data);
   // Split into train and test data.
