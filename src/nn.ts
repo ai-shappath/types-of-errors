@@ -99,12 +99,12 @@ export class Errors {
 
   public static WEIGHTED_SQUARE: ErrorFunction = {
     error: (output: number, target: number) => {
-      const weight = (target === -1 ? 200 : 1); // Increase weight for target -1
+      const weight = (target === -1 ? 500 : 1); // Increase weight for target -1
       console.log(`target: ${target}`);
       return weight * 0.5 * Math.pow(output - target, 2);
     },
     der: (output: number, target: number) => {
-      const weight = (target === -1 ? 200 : 1);
+      const weight = (target === -1 ? 500 : 1);
       return weight * (output - target);
     }
   };
