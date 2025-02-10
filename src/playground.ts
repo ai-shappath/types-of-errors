@@ -534,9 +534,9 @@ function drawNode(cx: number, cy: number, nodeId: string, isInput: boolean,
         width: BIAS_SIZE,
         height: BIAS_SIZE,
       }).on("mouseenter", function() {
-        updateHoverCard(HoverType.BIAS, node, d3.mouse(container.node()));
+        // updateHoverCard(HoverType.BIAS, node, d3.mouse(container.node()));
       }).on("mouseleave", function() {
-        updateHoverCard(null);
+        // updateHoverCard(null);
       });
   }
 
@@ -555,28 +555,28 @@ function drawNode(cx: number, cy: number, nodeId: string, isInput: boolean,
       selectedNodeId = nodeId;
       div.classed("hovered", true);
       nodeGroup.classed("hovered", true);
-      updateDecisionBoundary(network, false);
-      heatMap.updateBackground(boundary[nodeId], state.discretize);
+      // updateDecisionBoundary(network, false);
+      // heatMap.updateBackground(boundary[nodeId], state.discretize);
     })
     .on("mouseleave", function() {
       selectedNodeId = null;
       div.classed("hovered", false);
       nodeGroup.classed("hovered", false);
-      updateDecisionBoundary(network, false);
-      heatMap.updateBackground(boundary[nn.getOutputNode(network).id],
-          state.discretize);
+      // updateDecisionBoundary(network, false);
+      // heatMap.updateBackground(boundary[nn.getOutputNode(network).id],
+      //     state.discretize);
     });
-  if (isInput) {
-    div.on("click", function() {
-      state[nodeId] = !state[nodeId];
-      parametersChanged = true;
-      reset();
-    });
-    div.style("cursor", "pointer");
-  }
-  if (isInput) {
-    div.classed(activeOrNotClass, true);
-  }
+  // if (isInput) {
+  //   div.on("click", function() {
+  //     state[nodeId] = !state[nodeId];
+  //     parametersChanged = true;
+  //     reset();
+  //   });
+  //   div.style("cursor", "pointer");
+  // }
+  // if (isInput) {
+  //   div.classed(activeOrNotClass, true);
+  // }
   let nodeHeatMap = new HeatMap(RECT_SIZE, DENSITY / 10, xDomain,
       xDomain, div, {noSvg: true});
   div.datum({heatmap: nodeHeatMap, id: nodeId});
