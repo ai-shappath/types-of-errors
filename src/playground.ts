@@ -868,6 +868,7 @@ function updateDecisionBoundary(network: nn.Node[][], firstTime: boolean) {
   }
 }
 
+
 function getLoss(network: nn.Node[][], dataPoints: Example2D[]): number {
   let loss = 0;
   for (let i = 0; i < dataPoints.length; i++) {
