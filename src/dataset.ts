@@ -133,25 +133,46 @@ export function regressGaussian(numSamples: number, noise: number):
   return points;
 }
 
+// export function classifySpiralData(numSamples: number, noise: number):
+//     Example2D[] {
+//   let points: Example2D[] = [];
+//   let n = numSamples / 2;
+
+//   function genSpiral(deltaT: number, label: number) {
+//     for (let i = 0; i < n; i++) {
+//       let r = i / n * 5;
+//       let t = 1.75 * i / n * 2 * Math.PI + deltaT;
+//       let x = r * Math.sin(t) + randUniform(-1, 1) * noise;
+//       let y = r * Math.cos(t) + randUniform(-1, 1) * noise;
+//       points.push({x, y, label});
+//     }
+//   }
+
+//   genSpiral(0, 1); // Positive examples.
+//   genSpiral(Math.PI, -1); // Negative examples.
+//   return points;
+// }
 export function classifySpiralData(numSamples: number, noise: number):
     Example2D[] {
   let points: Example2D[] = [];
-  let n = numSamples / 2;
 
-  function genSpiral(deltaT: number, label: number) {
-    for (let i = 0; i < n; i++) {
-      let r = i / n * 5;
-      let t = 1.75 * i / n * 2 * Math.PI + deltaT;
-      let x = r * Math.sin(t) + randUniform(-1, 1) * noise;
-      let y = r * Math.cos(t) + randUniform(-1, 1) * noise;
+  let varianceScale = d3.scale.linear().domain([0, .5]).range([0.5, 4]);
+  let variance = varianceScale(noise);
+
+  function genGauss(cx: number, cy: number, label: number, numSample: number) {
+    for (let i = 0; i < numSample / 2; i++) {
+      let x = normalRandom(cx, variance);
+      let y = normalRandom(cy, variance);
       points.push({x, y, label});
     }
   }
 
-  genSpiral(0, 1); // Positive examples.
-  genSpiral(Math.PI, -1); // Negative examples.
+  genGauss(0, 0, 1, numSamples); // Gaussian with positive examples.
+  genGauss(1, 1, -1, numSamples/10); // Gaussian with negative examples.
   return points;
 }
+
+
 
 export function classifyCircleData(numSamples: number, noise: number):
     Example2D[] {
