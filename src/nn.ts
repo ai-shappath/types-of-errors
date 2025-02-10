@@ -111,8 +111,6 @@ export class Errors {
 }
 
 
-
-
 /** Polyfill for TANH */
 (Math as any).tanh = (Math as any).tanh || function(x) {
   if (x === Infinity) {

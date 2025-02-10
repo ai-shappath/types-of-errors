@@ -313,6 +313,24 @@ function makeGUI() {
   // Check/uncheck the checbox according to the current state.
   discretize.property("checked", state.discretize);
 
+  // Connect the loss function selector checkbox to the state.
+  let lossSelector = d3.select("#loss-selector").on("change", function() {
+    // If the checkbox is checked, use Weighted Square Loss; otherwise, use the standard Square Loss.
+    state.lossFunction = this.checked ? nn.Errors.WEIGHTED_SQUARE : nn.Errors.SQUARE;
+    
+    // Optionally, log the current loss function.
+    console.log(`Loss function set to: ${this.checked ? 'WEIGHTED_SQUARE' : 'SQUARE'}`);
+    
+    // Persist state and update the UI.
+    state.serialize();
+    userHasInteracted();
+    updateUI();
+  });
+
+  // Initialize the checkbox to reflect the current loss function state.
+  lossSelector.property("checked", state.lossFunction === nn.Errors.WEIGHTED_SQUARE);
+
+
   let percTrain = d3.select("#percTrainData").on("input", function() {
     state.percTrainData = this.value;
     d3.select("label[for='percTrainData'] .value").text(this.value);
@@ -875,7 +893,7 @@ function getLoss(network: nn.Node[][], dataPoints: Example2D[]): number {
     let dataPoint = dataPoints[i];
     let input = constructInput(dataPoint.x, dataPoint.y);
     let output = nn.forwardProp(network, input);
-    loss += nn.Errors.SQUARE.error(output, dataPoint.label);
+    loss += state.lossFunction.error(output, dataPoint.label);
   }
   return loss / dataPoints.length;
 }
@@ -943,7 +961,7 @@ function oneStep(): void {
   trainData.forEach((point, i) => {
     let input = constructInput(point.x, point.y);
     nn.forwardProp(network, input);
-    nn.backProp(network, point.label, nn.Errors.SQUARE);
+    nn.backProp(network, point.label, state.lossFunction);
     if ((i + 1) % state.batchSize === 0) {
       nn.updateWeights(network, state.learningRate, state.regularizationRate);
     }

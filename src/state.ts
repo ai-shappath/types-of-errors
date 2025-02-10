@@ -27,6 +27,11 @@ export let activations: {[key: string]: nn.ActivationFunction} = {
   "linear": nn.Activations.LINEAR
 };
 
+export let lossFunctions: { [key: string]: any } = {
+  "SQUARE": nn.Errors.SQUARE,
+  "WEIGHTED_SQUARE": nn.Errors.WEIGHTED_SQUARE
+};
+
 /** A map between names and regularization functions. */
 export let regularizations: {[key: string]: nn.RegularizationFunction} = {
   "none": null,
@@ -116,6 +121,7 @@ export class State {
     {name: "seed", type: Type.STRING},
     {name: "showTestData", type: Type.BOOLEAN},
     {name: "discretize", type: Type.BOOLEAN},
+    {name: "lossFunction", type: Type.OBJECT, keyMap: lossFunctions },
     {name: "percTrainData", type: Type.NUMBER},
     {name: "x", type: Type.BOOLEAN},
     {name: "y", type: Type.BOOLEAN},
@@ -140,6 +146,7 @@ export class State {
   noise = 8;
   batchSize = 5;
   discretize = true;
+  lossFunction = nn.Errors.SQUARE;
   tutorial: string = null;
   percTrainData = 4;
   activation = nn.Activations.RELU;
