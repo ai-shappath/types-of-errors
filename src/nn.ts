@@ -101,12 +101,12 @@ export interface RegularizationFunction {
 export class Errors {
   public static SQUARE: ErrorFunction = {
     error: (output: number, target: number) => {
-      const weight = (target === -1 ? 10 : 1); // Increase weight for target -1
+      const weight = (target === -1 ? 100 : 1); // Increase weight for target -1
       console.log(`target: ${target}`);
       return weight * 0.5 * Math.pow(output - target, 2);
     },
     der: (output: number, target: number) => {
-      const weight = (target === -1 ? 10 : 1);
+      const weight = (target === -1 ? 100 : 1);
       return weight * (output - target);
     }
   };
