@@ -90,11 +90,24 @@ export interface RegularizationFunction {
 }
 
 /** Built-in error functions */
+// export class Errors {
+//   public static SQUARE: ErrorFunction = {
+//     error: (output: number, target: number) =>
+//                0.5 * Math.pow(output - target, 2),
+//     der: (output: number, target: number) => output - target
+//   };
+// }
+
 export class Errors {
-  public static SQUARE: ErrorFunction = {
-    error: (output: number, target: number) =>
-               0.5 * Math.pow(output - target, 2),
-    der: (output: number, target: number) => output - target
+  public static WEIGHTED_SQUARE: ErrorFunction = {
+    error: (output: number, target: number) => {
+      const weight = (target === -1 ? 100 : 1); // Increase weight for target -1
+      return weight * 0.5 * Math.pow(output - target, 2);
+    },
+    der: (output: number, target: number) => {
+      const weight = (target === -1 ? 100 : 1);
+      return weight * (output - target);
+    }
   };
 }
 

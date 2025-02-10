@@ -168,7 +168,7 @@ export function classifySpiralData(numSamples: number, noise: number):
   }
 
   genGauss(0, 0, 1, numSamples); // Gaussian with positive examples.
-  genGauss(1, 1, -1, numSamples/10); // Gaussian with negative examples.
+  genGauss(1.5, 1.5, -1, numSamples/10); // Gaussian with negative examples.
   return points;
 }
 
