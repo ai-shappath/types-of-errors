@@ -564,23 +564,24 @@ function drawNode(cx: number, cy: number, nodeId: string, isInput: boolean,
     .style({
       position: "absolute",
       left: `${x + 3}px`,
-      top: `${y + 3}px`
-    })
-    .on("mouseenter", function() {
-      selectedNodeId = nodeId;
-      div.classed("hovered", true);
-      nodeGroup.classed("hovered", true);
-      // updateDecisionBoundary(network, false);
-      // heatMap.updateBackground(boundary[nodeId], state.discretize);
-    })
-    .on("mouseleave", function() {
-      selectedNodeId = null;
-      div.classed("hovered", false);
-      nodeGroup.classed("hovered", false);
-      // updateDecisionBoundary(network, false);
-      // heatMap.updateBackground(boundary[nn.getOutputNode(network).id],
-      //     state.discretize);
+      top: `${y + 3}px`,
+      "background-color": "black"
     });
+    // .on("mouseenter", function() {
+    //   selectedNodeId = nodeId;
+    //   div.classed("hovered", true);
+    //   nodeGroup.classed("hovered", true);
+    //   // updateDecisionBoundary(network, false);
+    //   // heatMap.updateBackground(boundary[nodeId], state.discretize);
+    // })
+    // .on("mouseleave", function() {
+    //   selectedNodeId = null;
+    //   div.classed("hovered", false);
+    //   nodeGroup.classed("hovered", false);
+    //   // updateDecisionBoundary(network, false);
+    //   // heatMap.updateBackground(boundary[nn.getOutputNode(network).id],
+    //   //     state.discretize);
+    // });
   // if (isInput) {
   //   div.on("click", function() {
   //     state[nodeId] = !state[nodeId];
@@ -592,9 +593,9 @@ function drawNode(cx: number, cy: number, nodeId: string, isInput: boolean,
   // if (isInput) {
   //   div.classed(activeOrNotClass, true);
   // }
-  let nodeHeatMap = new HeatMap(RECT_SIZE, DENSITY / 10, xDomain,
-      xDomain, div, {noSvg: true});
-  div.datum({heatmap: nodeHeatMap, id: nodeId});
+  // let nodeHeatMap = new HeatMap(RECT_SIZE, DENSITY / 10, xDomain,
+  //     xDomain, div, {noSvg: true});
+  // div.datum({heatmap: nodeHeatMap, id: nodeId});
 
 }
 
