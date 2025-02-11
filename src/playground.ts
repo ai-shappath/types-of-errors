@@ -932,9 +932,9 @@ function updateUI(firstStep = false) {
       .each(function(data: {heatmap: HeatMap, id: string}) {
     // data.heatmap.updateBackground(reduceMatrix(boundary[data.id], 10),
     //     state.discretize);
-    if (!state.hideDecision) {
-        data.heatmap.updateBackground(reduceMatrix(boundary[data.id], 10), state.discretize);
-    }
+    // if (!state.hideDecision) {
+    //     data.heatmap.updateBackground(reduceMatrix(boundary[data.id], 10), state.discretize);
+    // }
   });
 
   function zeroPad(n: number): string {
