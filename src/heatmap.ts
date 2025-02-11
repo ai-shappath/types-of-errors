@@ -89,7 +89,6 @@ export class HeatMap {
         top: `-${padding}px`,
         left: `-${padding}px`
       });
-      
     this.canvas = container.append("canvas")
       .attr("width", numSamples)
       .attr("height", numSamples)
@@ -98,19 +97,6 @@ export class HeatMap {
       .style("position", "absolute")
       .style("top", `${padding}px`)
       .style("left", `${padding}px`);
-
-    const whiteOverlay = container.append("div")
-    .classed("white-overlay", true)
-    .style({
-      position: "absolute",
-      top: `${padding}px`,
-      left: `${padding}px`,
-      width: (width - 2 * padding) + "px",
-      height: (height - 2 * padding) + "px",
-      background: "white",
-      "pointer-events": "none",  // Allows mouse events to pass through.
-      display: "none"            // Initially hidden.
-    });
 
     if (!this.settings.noSvg) {
       this.svg = container.append("svg").attr({
@@ -149,8 +135,9 @@ export class HeatMap {
     }
   }
 
+  
   // Inside the HeatMap class, add the following method:
-  public setBackgroundWhite(): void {
+  setBackgroundWhite(): void {
     const canvasElement = this.canvas.node() as HTMLCanvasElement;
     const context = canvasElement.getContext("2d");
     if (!context) {
