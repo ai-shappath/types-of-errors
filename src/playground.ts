@@ -628,7 +628,7 @@ function drawNetwork(network: nn.Node[][]): void {
   let nodeIndexScale = (nodeIndex: number) => nodeIndex * (RECT_SIZE + 25);
 
 
-  let calloutThumb = d3.select(".callout.thumbnail").style("display", "none");
+  // let calloutThumb = d3.select(".callout.thumbnail").style("display", "none");
   let calloutWeights = d3.select(".callout.weights").style("display", "none");
   let idWithCallout = null;
   let targetIdWithCallout = null;
@@ -656,18 +656,18 @@ function drawNetwork(network: nn.Node[][]): void {
       drawNode(cx, cy, node.id, false, container, node);
 
       // Show callout to thumbnails.
-      let numNodes = network[layerIdx].length;
-      let nextNumNodes = network[layerIdx + 1].length;
-      if (idWithCallout == null &&
-          i === numNodes - 1 &&
-          nextNumNodes <= numNodes) {
-        calloutThumb.style({
-          display: null,
-          top: `${20 + 3 + cy}px`,
-          left: `${cx}px`
-        });
-        idWithCallout = node.id;
-      }
+      // let numNodes = network[layerIdx].length;
+      // let nextNumNodes = network[layerIdx + 1].length;
+      // if (idWithCallout == null &&
+      //     i === numNodes - 1 &&
+      //     nextNumNodes <= numNodes) {
+      //   calloutThumb.style({
+      //     display: null,
+      //     top: `${20 + 3 + cy}px`,
+      //     left: `${cx}px`
+      //   });
+      //   idWithCallout = node.id;
+      // }
 
       // Draw links.
       for (let j = 0; j < node.inputLinks.length; j++) {
@@ -711,7 +711,7 @@ function drawNetwork(network: nn.Node[][]): void {
 
   // Adjust the height of the features column.
   let height = Math.max(
-    getRelativeHeight(calloutThumb),
+    // getRelativeHeight(calloutThumb),
     getRelativeHeight(calloutWeights),
     getRelativeHeight(d3.select("#network"))
   );
