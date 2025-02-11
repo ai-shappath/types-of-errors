@@ -120,6 +120,7 @@ export class State {
     {name: "networkShape", type: Type.ARRAY_NUMBER},
     {name: "seed", type: Type.STRING},
     {name: "showTestData", type: Type.BOOLEAN},
+    {name: "hideDecision", type: Type.BOOLEAN},
     {name: "discretize", type: Type.BOOLEAN},
     {name: "lossFunction", type: Type.OBJECT, keyMap: lossFunctions },
     {name: "percTrainData", type: Type.NUMBER},
@@ -143,6 +144,7 @@ export class State {
   learningRate = 0.01;
   regularizationRate = 0;
   showTestData = false;
+  hideDecision = false;
   noise = 8;
   batchSize = 5;
   discretize = true;

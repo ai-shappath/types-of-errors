@@ -330,6 +330,15 @@ function makeGUI() {
   // Initialize the checkbox to reflect the current loss function state.
   lossSelector.property("checked", state.lossFunction === nn.Errors.WEIGHTED_SQUARE);
 
+  let hideDecision = d3.select("#hide-decision").on("change", function() {
+    state.hideDecision = this.checked;
+    state.serialize();
+    userHasInteracted();
+    heatMap.updateTestPoints(state.showTestData ? testData : []);
+  });
+  // Check/uncheck the checkbox according to the current state.
+  hideDecision.property("checked", state.hideDecision);
+
 
   let percTrain = d3.select("#percTrainData").on("input", function() {
     state.percTrainData = this.value;
