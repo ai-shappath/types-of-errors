@@ -330,30 +330,31 @@ function makeGUI() {
   // Initialize the checkbox to reflect the current loss function state.
   lossSelector.property("checked", state.lossFunction === nn.Errors.WEIGHTED_SQUARE);
 
-  // let hideDecision = d3.select("#hide-decision").on("change", function() {
-  //   state.hideDecision = this.checked;
-  //   state.serialize();
-  //   userHasInteracted();
-  //   // heatMap.setBackgroundWhite(); if else here
-  // });
-  // // Check/uncheck the checkbox according to the current state.
-  // hideDecision.property("checked", state.hideDecision);
-  
   let hideDecision = d3.select("#hide-decision").on("change", function() {
     state.hideDecision = this.checked;
     state.serialize();
     userHasInteracted();
-  
-    // Toggle the white overlay’s visibility.
-    if (state.hideDecision) {
-      (heatMap as any).whiteOverlay.style("display", "block");
-    } else {
-      (heatMap as any).whiteOverlay.style("display", "none");
-    }
+    heatMap.updateTestPoints(state.hideDecision ? testData : []);
+    // heatMap.setBackgroundWhite(); if else here
   });
-  
-  // Ensure the checkbox reflects the current state.
+  // Check/uncheck the checkbox according to the current state.
   hideDecision.property("checked", state.hideDecision);
+
+  // let hideDecision = d3.select("#hide-decision").on("change", function() {
+  //   state.hideDecision = this.checked;
+  //   state.serialize();
+  //   userHasInteracted();
+  
+  //   // Toggle the white overlay’s visibility.
+  //   if (state.hideDecision) {
+  //     (heatMap as any).whiteOverlay.style("display", "block");
+  //   } else {
+  //     (heatMap as any).whiteOverlay.style("display", "none");
+  //   }
+  // });
+
+  // // Ensure the checkbox reflects the current state.
+  // hideDecision.property("checked", state.hideDecision);
 
 
   let percTrain = d3.select("#percTrainData").on("input", function() {
