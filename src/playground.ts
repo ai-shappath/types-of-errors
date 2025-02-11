@@ -308,8 +308,13 @@ function makeGUI() {
     state.hideDecision = this.checked;
     state.serialize();
     userHasInteracted();
-    heatMap.setBackgroundWhite(); 
-  });
+
+    if (state.hideDecision) {
+        heatMap.setBackgroundWhite();  // Set background to white
+    } else {
+        heatMap.updateBackground(boundary[nn.getOutputNode(network).id], state.discretize);
+    }
+    });
   // Check/uncheck the checkbox according to the current state.
   hideDecision.property("checked", state.hideDecision);
 
