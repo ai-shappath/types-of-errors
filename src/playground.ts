@@ -560,8 +560,8 @@ function drawNode(cx: number, cy: number, nodeId: string, isInput: boolean,
     .attr("id", `canvas-${nodeId}`)
     .attr("class", "canvas")
     .style("position", "absolute")
-    .style("left", `${x + 3}px`)
-    .style("top", `${y + 3}px`)
+    .style("left", `${x}px`)
+    .style("top", `${y}px`)
     // Optionally, specify width and height if needed:
     .style("width", `${RECT_SIZE}px`)
     .style("height", `${RECT_SIZE}px`)
