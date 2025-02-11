@@ -144,7 +144,7 @@ export class State {
   learningRate = 0.01;
   regularizationRate = 0;
   showTestData = false;
-  hideDecision = false;
+  hideDecision = true;
   noise = 8;
   batchSize = 5;
   discretize = true;
