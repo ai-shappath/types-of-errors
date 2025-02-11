@@ -922,13 +922,18 @@ function updateUI(firstStep = false) {
   updateDecisionBoundary(network, firstStep);
   let selectedId = selectedNodeId != null ?
       selectedNodeId : nn.getOutputNode(network).id;
-  heatMap.updateBackground(boundary[selectedId], state.discretize);
+  if (!state.hideDecision) {
+    heatMap.updateBackground(boundary[selectedId], state.discretize);
+  }
 
   // Update all decision boundaries.
   d3.select("#network").selectAll("div.canvas")
       .each(function(data: {heatmap: HeatMap, id: string}) {
-    data.heatmap.updateBackground(reduceMatrix(boundary[data.id], 10),
-        state.discretize);
+    // data.heatmap.updateBackground(reduceMatrix(boundary[data.id], 10),
+    //     state.discretize);
+    if (!state.hideDecision) {
+        data.heatmap.updateBackground(reduceMatrix(boundary[data.id], 10), state.discretize);
+    }
   });
 
   function zeroPad(n: number): string {
