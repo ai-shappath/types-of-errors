@@ -557,16 +557,16 @@ function drawNode(cx: number, cy: number, nodeId: string, isInput: boolean,
 
   // Draw the node's canvas.
   let div = d3.select("#network").insert("div", ":first-child")
-    .attr({
-      "id": `canvas-${nodeId}`,
-      "class": "canvas"
-    })
-    .style({
-      position: "absolute",
-      left: `${x + 3}px`,
-      top: `${y + 3}px`,
-      "background-color": "black"
-    })
+    .attr("id", `canvas-${nodeId}`)
+    .attr("class", "canvas")
+    .style("position", "absolute")
+    .style("left", `${x + 3}px`)
+    .style("top", `${y + 3}px`)
+    // Optionally, specify width and height if needed:
+    .style("width", `${RECT_SIZE}px`)
+    .style("height", `${RECT_SIZE}px`)
+    // Set the background to black.
+    .style("background-color", "black")
     .on("mouseenter", function() {
       selectedNodeId = nodeId;
       div.classed("hovered", true);
