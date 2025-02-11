@@ -563,8 +563,8 @@ function drawNode(cx: number, cy: number, nodeId: string, isInput: boolean,
     .style("left", `${x}px`)
     .style("top", `${y}px`)
     // Optionally, specify width and height if needed:
-    .style("width", `${RECT_SIZE}px`)
-    .style("height", `${RECT_SIZE}px`)
+    // .style("width", `${RECT_SIZE}px`)
+    // .style("height", `${RECT_SIZE}px`)
     // Set the background to black.
     .style("background-color", "black")
     .on("mouseenter", function() {
