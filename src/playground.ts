@@ -165,6 +165,7 @@ let colorScale = d3.scale.linear<string, number>()
                      .range(["#f59322", "#e8eaeb", "#0877bd"])
                      .clamp(true);
 let iter = 0;
+let data_temp: Example2D[] = [];
 let trainData: Example2D[] = [];
 let testData: Example2D[] = [];
 let network: nn.Node[][] = null;
@@ -1198,6 +1199,7 @@ function generateData(firstTime = false) {
       state.dataset : state.regDataset;
 
   let data = generator(numSamples, state.noise / 100);
+  data_temp = data
   let t_data = generator(numSamples, state.noise / 100);
 
   // Shuffle the data in-place.
@@ -1224,14 +1226,14 @@ function percTrain_generateData(firstTime = false) {
   let generator = state.problem === Problem.CLASSIFICATION ?
       state.dataset : state.regDataset;
 
-  let data = generator(numSamples, state.noise / 100);
+  // let data = generator(numSamples, state.noise / 100);
   // let t_data = generator(numSamples, state.noise / 100);
 
   // Shuffle the data in-place.
-  shuffle(data);
+  // shuffle(data);
   // Split into train and test data.
-  let splitIndex = Math.floor(data.length * state.percTrainData / 100);
-  trainData = data.slice(0, splitIndex);
+  let splitIndex = Math.floor(data_temp.length * state.percTrainData / 100);
+  trainData = data_temp.slice(0, splitIndex);
   // testData = data.slice(splitIndex);
   // testData = t_data
   heatMap.updatePoints(trainData);
