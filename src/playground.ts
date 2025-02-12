@@ -347,7 +347,7 @@ function makeGUI() {
   let percTrain = d3.select("#percTrainData").on("input", function() {
     state.percTrainData = this.value;
     d3.select("label[for='percTrainData'] .value").text(this.value);
-    generateData();
+    percTrain_generateData();
     parametersChanged = true;
     percTrain_reset();
   });
@@ -1207,6 +1207,33 @@ function generateData(firstTime = false) {
   trainData = data.slice(0, splitIndex);
   // testData = data.slice(splitIndex);
   testData = t_data
+  heatMap.updatePoints(trainData);
+  heatMap.updateTestPoints(state.showTestData ? testData : []);
+}
+
+function percTrain_generateData(firstTime = false) {
+  if (!firstTime) {
+    // Change the seed.
+    state.seed = Math.random().toFixed(5);
+    state.serialize();
+    userHasInteracted();
+  }
+  Math.seedrandom(state.seed);
+  let numSamples = (state.problem === Problem.REGRESSION) ?
+      NUM_SAMPLES_REGRESS : NUM_SAMPLES_CLASSIFY;
+  let generator = state.problem === Problem.CLASSIFICATION ?
+      state.dataset : state.regDataset;
+
+  let data = generator(numSamples, state.noise / 100);
+  // let t_data = generator(numSamples, state.noise / 100);
+
+  // Shuffle the data in-place.
+  shuffle(data);
+  // Split into train and test data.
+  let splitIndex = Math.floor(data.length * state.percTrainData / 100);
+  trainData = data.slice(0, splitIndex);
+  // testData = data.slice(splitIndex);
+  // testData = t_data
   heatMap.updatePoints(trainData);
   heatMap.updateTestPoints(state.showTestData ? testData : []);
 }
