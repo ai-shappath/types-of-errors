@@ -170,8 +170,8 @@ let testData: Example2D[] = [];
 let network: nn.Node[][] = null;
 let lossTrain = 0;
 let lossTest = 0;
-let accuracyTrain = 0
-let accuracyTest = 0
+let accuracyTrain = 0;
+let accuracyTest = 0;
 let player = new Player();
 let lineChart = new AppendingLineChart(d3.select("#linechart"),
     ["#777", "black"]);
