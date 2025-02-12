@@ -345,6 +345,7 @@ function makeGUI() {
   lossSelector.property("checked", state.lossFunction === nn.Errors.WEIGHTED_SQUARE);
 
   let percTrain = d3.select("#percTrainData").on("input", function() {
+    heatMap.setBackgroundWhite();
     state.percTrainData = this.value;
     d3.select("label[for='percTrainData'] .value").text(this.value);
     generateData();
@@ -920,7 +921,7 @@ function getAccuracy(network: nn.Node[][], dataPoints: Example2D[]): number {
     
     // For binary classification, assume a threshold of 0.5.
     // If the output is >= 0.5, predict class 1; otherwise, predict class 0.
-    const predictedLabel = output >= 0.5 ? 1 : 0;
+    const predictedLabel = output >= 0.0 ? 1 : 0;
     
     if (predictedLabel === point.label) {
       correctCount++;
@@ -966,9 +967,8 @@ function updateUI(firstStep = false) {
   }
 
   // Update loss and iteration number.
-  d3.select("#loss-train").text(humanReadable(0));
-  d3.select("#loss-test").text(humanReadable(0));
-
+  d3.select("#loss-train").text(humanReadable(accuracyTrain));
+  d3.select("#loss-test").text(humanReadable(accuracyTest));
 
 
   d3.select("#iter-number").text(addCommas(zeroPad(iter)));

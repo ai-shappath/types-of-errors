@@ -263,6 +263,7 @@ export function buildNetwork(
  *     nodes in the network.
  * @return The final output of the network.
  */
+
 export function forwardProp(network: Node[][], inputs: number[]): number {
   let inputLayer = network[0];
   if (inputs.length !== inputLayer.length) {
