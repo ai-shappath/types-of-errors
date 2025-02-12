@@ -108,6 +108,15 @@ export class Errors {
       return weight * (output - target);
     }
   };
+
+  public static ACCURACY: ErrorFunction = {
+    error: (output: number, target: number): number => {
+      const predicted = output >= 0 ? 1 : 0;
+      // If prediction is correct, error is 0; if not, error is 1.
+      return predicted === target ? 0 : 1;
+    },
+    der: (_output: number, _target: number): number => 0 // Not used
+  };
 }
 
 
