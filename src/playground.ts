@@ -344,9 +344,6 @@ function makeGUI() {
   // Initialize the checkbox to reflect the current loss function state.
   lossSelector.property("checked", state.lossFunction === nn.Errors.WEIGHTED_SQUARE);
 
-
-
-
   let percTrain = d3.select("#percTrainData").on("input", function() {
     state.percTrainData = this.value;
     d3.select("label[for='percTrainData'] .value").text(this.value);
@@ -969,8 +966,8 @@ function updateUI(firstStep = false) {
   }
 
   // Update loss and iteration number.
-  d3.select("#loss-train").text(humanReadable(accuracyTrain));
-  d3.select("#loss-test").text(humanReadable(accuracyTest));
+  d3.select("#loss-train").text(humanReadable(0));
+  d3.select("#loss-test").text(humanReadable(0));
 
 
 
