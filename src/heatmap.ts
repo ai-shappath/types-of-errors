@@ -143,7 +143,7 @@ export class HeatMap {
     if (!context) {
       throw new Error("Could not get canvas context");
     }
-    context.fillStyle = "#FFFFFF";
+    context.fillStyle = "#f7f7f7";
     // Use the canvas element's width and height attributes.
     context.fillRect(0, 0, canvasElement.width, canvasElement.height);
   }

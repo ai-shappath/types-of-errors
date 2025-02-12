@@ -155,8 +155,7 @@ let selectedNodeId: string = null;
 // Plot the heatmap.
 let xDomain: [number, number] = [-6, 6];
 let heatMap =
-    new HeatMap(300, DENSITY, xDomain, xDomain, d3.select("#heatmap"),
-        {showAxes: true});
+    new HeatMap(300, DENSITY, xDomain, xDomain, d3.select("#heatmap"),{showAxes: false});
 let linkWidthScale = d3.scale.linear()
   .domain([0, 5])
   .range([1, 10])
@@ -171,6 +170,8 @@ let testData: Example2D[] = [];
 let network: nn.Node[][] = null;
 let lossTrain = 0;
 let lossTest = 0;
+let accuracyTrain = 0
+let accuracyTest = 0
 let player = new Player();
 let lineChart = new AppendingLineChart(d3.select("#linechart"),
     ["#777", "black"]);
@@ -593,8 +594,7 @@ function drawNode(cx: number, cy: number, nodeId: string, isInput: boolean,
   // if (isInput) {
   //   div.classed(activeOrNotClass, true);
   // }
-  let nodeHeatMap = new HeatMap(RECT_SIZE, DENSITY / 10, xDomain,
-      xDomain, div, {noSvg: true});
+  let nodeHeatMap = new HeatMap(RECT_SIZE, DENSITY / 10, xDomain, xDomain, div, {noSvg: true, showAxes: false});
   div.datum({heatmap: nodeHeatMap, id: nodeId});
 
 }
@@ -914,6 +914,24 @@ function getLoss(network: nn.Node[][], dataPoints: Example2D[]): number {
   return loss / dataPoints.length;
 }
 
+function getAccuracy(network: nn.Node[][], dataPoints: Example2D[]): number {
+  let correctCount = 0;
+  for (let i = 0; i < dataPoints.length; i++) {
+    const point = dataPoints[i];
+    const input = constructInput(point.x, point.y);
+    const output = nn.forwardProp(network, input);
+    
+    // For binary classification, assume a threshold of 0.5.
+    // If the output is >= 0.5, predict class 1; otherwise, predict class 0.
+    const predictedLabel = output >= 0.5 ? 1 : 0;
+    
+    if (predictedLabel === point.label) {
+      correctCount++;
+    }
+  }
+  return correctCount / dataPoints.length;
+}
+
 function updateUI(firstStep = false) {
   // Update the links visually.
   updateWeightsUI(network, d3.select("g.core"));
@@ -951,10 +969,14 @@ function updateUI(firstStep = false) {
   }
 
   // Update loss and iteration number.
-  d3.select("#loss-train").text(humanReadable(lossTrain));
-  d3.select("#loss-test").text(humanReadable(lossTest));
+  d3.select("#loss-train").text(humanReadable(accuracyTrain));
+  d3.select("#loss-test").text(humanReadable(accuracyTest));
+
+
+
   d3.select("#iter-number").text(addCommas(zeroPad(iter)));
   lineChart.addDataPoint([lossTrain, lossTest]);
+  // lineChart.addDataPoint([lossTrain, lossTest]);
 }
 
 function constructInputIds(): string[] {
@@ -990,6 +1012,8 @@ function oneStep(): void {
   // Compute the loss.
   lossTrain = getLoss(network, trainData);
   lossTest = getLoss(network, testData);
+  accuracyTrain = getAccuracy(network, trainData);
+  accuracyTest = getAccuracy(network, testData);
   updateUI();
 }
 
@@ -1030,6 +1054,9 @@ function reset(onStartup=false) {
       state.regularization, constructInputIds(), state.initZero);
   lossTrain = getLoss(network, trainData);
   lossTest = getLoss(network, testData);
+  accuracyTrain = getAccuracy(network, trainData);
+  accuracyTest = getAccuracy(network,testData);
+
   drawNetwork(network);
   updateUI(true);
 };
