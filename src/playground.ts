@@ -1198,13 +1198,15 @@ function generateData(firstTime = false) {
       state.dataset : state.regDataset;
 
   let data = generator(numSamples, state.noise / 100);
+  let t_data = generator(numSamples, state.noise / 100);
 
   // Shuffle the data in-place.
   shuffle(data);
   // Split into train and test data.
   let splitIndex = Math.floor(data.length * state.percTrainData / 100);
   trainData = data.slice(0, splitIndex);
-  testData = data.slice(splitIndex);
+  // testData = data.slice(splitIndex);
+  testData = t_data
   heatMap.updatePoints(trainData);
   heatMap.updateTestPoints(state.showTestData ? testData : []);
 }
