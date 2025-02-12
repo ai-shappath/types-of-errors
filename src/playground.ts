@@ -345,12 +345,11 @@ function makeGUI() {
   lossSelector.property("checked", state.lossFunction === nn.Errors.WEIGHTED_SQUARE);
 
   let percTrain = d3.select("#percTrainData").on("input", function() {
-    // heatMap.setBackgroundWhite();
     state.percTrainData = this.value;
     d3.select("label[for='percTrainData'] .value").text(this.value);
     generateData();
     parametersChanged = true;
-    reset();
+    percTrain_reset();
   });
   percTrain.property("value", state.percTrainData);
   d3.select("label[for='percTrainData'] .value").text(state.percTrainData);
@@ -1046,6 +1045,35 @@ function reset(onStartup=false) {
       nn.Activations.LINEAR : nn.Activations.TANH;
   network = nn.buildNetwork(shape, state.activation, outputActivation,
       state.regularization, constructInputIds(), state.initZero);
+  lossTrain = getLoss(network, trainData);
+  lossTest = getLoss(network, testData);
+  accuracyTrain = getAccuracy(network, trainData);
+  accuracyTest = getAccuracy(network,testData);
+
+  drawNetwork(network);
+  updateUI(true);
+};
+
+function percTrain_reset(onStartup=false) {
+  lineChart.reset();
+  state.serialize();
+  if (!onStartup) {
+    userHasInteracted();
+  }
+  player.pause();
+
+  let suffix = state.numHiddenLayers !== 1 ? "s" : "";
+  d3.select("#layers-label").text("Hidden layer" + suffix);
+  d3.select("#num-layers").text(state.numHiddenLayers);
+
+  // Make a simple network.
+  // iter = 0;
+  // let numInputs = constructInput(0 , 0).length;
+  // let shape = [numInputs].concat(state.networkShape).concat([1]);
+  // let outputActivation = (state.problem === Problem.REGRESSION) ?
+  //     nn.Activations.LINEAR : nn.Activations.TANH;
+  // network = nn.buildNetwork(shape, state.activation, outputActivation,
+  //     state.regularization, constructInputIds(), state.initZero);
   lossTrain = getLoss(network, trainData);
   lossTest = getLoss(network, testData);
   accuracyTrain = getAccuracy(network, trainData);
