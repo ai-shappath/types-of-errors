@@ -111,7 +111,7 @@ export class Errors {
 
   public static ACCURACY: ErrorFunction = {
     error: (output: number, target: number): number => {
-      const predicted = output >= 0 ? 1 : 0;
+      const predicted = output >= 0.0 ? 1 : -1;
       // If prediction is correct, error is 0; if not, error is 1.
       return predicted === target ? 0 : 1;
     },
