@@ -150,7 +150,7 @@ export class State {
   discretize = true;
   lossFunction = nn.Errors.SQUARE;
   tutorial: string = null;
-  percTrainData = 4;
+  percTrainData = 1;
   activation = nn.Activations.RELU;
   regularization: nn.RegularizationFunction = null;
   problem = Problem.CLASSIFICATION;
