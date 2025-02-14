@@ -355,25 +355,25 @@ function makeGUI() {
   percTrain.property("value", state.percTrainData);
   d3.select("label[for='percTrainData'] .value").text(state.percTrainData);
 
-  let noise = d3.select("#noise").on("input", function() {
-    state.noise = this.value;
-    d3.select("label[for='noise'] .value").text(this.value);
-    generateData();
-    parametersChanged = true;
-    reset();
-  });
-  let currentMax = parseInt(noise.property("max"));
-  if (state.noise > currentMax) {
-    if (state.noise <= 200) {
-      noise.property("max", state.noise);
-    } else {
-      state.noise = 100;
-    }
-  } else if (state.noise < 0) {
-    state.noise = 0;
-  }
-  noise.property("value", state.noise);
-  d3.select("label[for='noise'] .value").text(state.noise);
+  // let noise = d3.select("#noise").on("input", function() {
+  //   state.noise = this.value;
+  //   d3.select("label[for='noise'] .value").text(this.value);
+  //   generateData();
+  //   parametersChanged = true;
+  //   reset();
+  // });
+  // let currentMax = parseInt(noise.property("max"));
+  // if (state.noise > currentMax) {
+  //   if (state.noise <= 200) {
+  //     noise.property("max", state.noise);
+  //   } else {
+  //     state.noise = 100;
+  //   }
+  // } else if (state.noise < 0) {
+  //   state.noise = 0;
+  // }
+  // noise.property("value", state.noise);
+  // d3.select("label[for='noise'] .value").text(state.noise);
 
   let batchSize = d3.select("#batchSize").on("input", function() {
     state.batchSize = this.value;
