@@ -353,7 +353,7 @@ function makeGUI() {
     percTrain_reset();
   });
   percTrain.property("value", state.percTrainData);
-  d3.select("label[for='percTrainData'] .value").text(state.percTrainData);
+  // d3.select("label[for='percTrainData'] .value").text(state.percTrainData);
 
   // let noise = d3.select("#noise").on("input", function() {
   //   state.noise = this.value;
