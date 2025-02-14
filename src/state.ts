@@ -145,7 +145,7 @@ export class State {
   regularizationRate = 0;
   showTestData = false;
   hideDecision = true;
-  noise = 8;
+  noise = 0;
   batchSize = 5;
   discretize = true;
   lossFunction = nn.Errors.SQUARE;
